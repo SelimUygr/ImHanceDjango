@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Image Converter - Result</title>
+  {% load static %}
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="/ImHanceApp/" class="navbar-brand">ImHance</a>
+  </nav>
+  <div class="container d-flex justify-content-center">
+    <h2>Enhanced Image:</h2>
+  </div>
+  <div class="container d-flex justify-content-center">
+    <img src="{% static 'output.png' %}" alt="Enhanced Image">
+  </div>
+</body>
+
+</html>
