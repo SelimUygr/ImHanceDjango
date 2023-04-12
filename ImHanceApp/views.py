@@ -1,6 +1,7 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from django.template import loader
+from django.template import loader,RequestContext
 from django.conf import settings
 import base64
 import os
@@ -14,6 +15,7 @@ def index(request):
     template = loader.get_template("try.html")
     return HttpResponse(template.render())
 
+@csrf_exempt
 def main(request):
     if request.method == 'POST':
         # Get the uploaded image file
@@ -33,6 +35,7 @@ def main(request):
         sr_image.save(f'{settings.STATICFILES_DIRS[0]}/output.png')
         # Render a template that displays the converted image
         return render(request, 'result.html', {'image_path': 'static/output.png'})
+
 
     return render(request, 'try.html')
 
