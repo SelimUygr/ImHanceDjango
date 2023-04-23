@@ -8,7 +8,10 @@ import os
 import torch
 from PIL import Image
 import numpy as np
+import sys
+sys.path.append("/content/ImHanceDjango/ImHance/AI")
 from RealESRGAN import RealESRGAN
+
 
 # Create your views here.
 def index(request):
