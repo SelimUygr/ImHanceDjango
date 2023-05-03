@@ -8,7 +8,8 @@ import os
 import torch
 from PIL import Image
 import numpy as np
-from RealESRGAN import RealESRGAN
+from ImHanceApp.AI.RealESRGAN import inference_realesrgan
+
 
 # Create your views here.
 def index(request):
@@ -60,7 +61,10 @@ def main(request):
         # Render a template that displays the converted image
         return render(request, 'result.html', {'image_path': 'static/output.png'})
 
-    return render(request, 'try.html')
+    # return render(request, 'try.html')
+
+    pass
+
 
 def result(request):
     image_path = f'{settings.STATICFILES_DIRS[0]}/output.png'
