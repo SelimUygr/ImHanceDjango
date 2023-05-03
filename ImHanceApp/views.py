@@ -8,7 +8,14 @@ import os
 import torch
 from PIL import Image
 import numpy as np
+<<<<<<< HEAD
 from ImHanceApp.AI.RealESRGAN import inference_realesrgan
+
+=======
+import sys
+sys.path.append("/content/ImHanceDjango/ImHance/AI")
+from RealESRGAN import RealESRGAN
+>>>>>>> 07c8731a5bd592ef68d5bdc26ac762119d4bc795
 
 
 # Create your views here.
