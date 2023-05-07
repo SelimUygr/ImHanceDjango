@@ -1,13 +1,17 @@
 import cv2
 import os
+import sys
+# Add project path to the system path for python to find all the modules in the project
+sys.path.append(f"{os.getcwd()}/RealESRGANAPP")
 
-os.chdir(f"{os.getcwd()}/RealESRGANAPP")
+# Change current working directory to the REALESRGANAPP directory for working in
+os.chdir(f"{os.getcwd()}\\RealESRGANAPP")
 
 
 import base64
 from basicsr.archs.rrdbnet_arch import RRDBNet
 
-from .realesrgan import RealESRGANer
+from realesrgan import RealESRGANer
 # Change working directory to use ai model!
 
 def enhance(img):
@@ -51,8 +55,7 @@ def enhance(img):
 
     # cv2.imencode(extension, output)[1]
     enhanced_image = base64.b64encode(cv2.imencode(f".{extension}", output)[1])
-
     return enhanced_image
+
 img = open("inputs/image.png")
-    
 enhance(img)
