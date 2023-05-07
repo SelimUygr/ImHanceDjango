@@ -5,7 +5,7 @@ import sys
 sys.path.append(f"{os.getcwd()}/RealESRGANAPP")
 
 # Change current working directory to the REALESRGANAPP directory for working in
-os.chdir(f"{os.getcwd()}\\RealESRGANAPP")
+os.chdir(f"{os.getcwd()}/RealESRGANAPP")
 
 
 import base64
