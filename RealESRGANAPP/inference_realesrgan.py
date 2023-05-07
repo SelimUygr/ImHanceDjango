@@ -1,6 +1,8 @@
 import cv2
 import os
-os.chdir("C:\\Users\\omsuy\\Masaüstü\\AI Projects\\ImHance\\RealESRGANAPP")
+
+os.chdir(f"{os.getcwd()}\\RealESRGANAPP")
+
 
 import base64
 from basicsr.archs.rrdbnet_arch import RRDBNet
