@@ -1,7 +1,7 @@
 import cv2
 import os
 
-os.chdir(f"{os.getcwd()}\\RealESRGANAPP")
+os.chdir(f"{os.getcwd()}/RealESRGANAPP")
 
 
 import base64
