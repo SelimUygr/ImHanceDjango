@@ -1,6 +1,7 @@
 import cv2
 import os
 import sys
+import numpy as np
 # Add project path to the system path for python to find all the modules in the project
 sys.path.append(f"{os.getcwd()}/RealESRGANAPP")
 
@@ -14,7 +15,10 @@ from basicsr.archs.rrdbnet_arch import RRDBNet
 from realesrgan import RealESRGANer
 # Change working directory to use ai model!
 
-def enhance(img):
+def enhance(img_path):
+    # Read image with cv2 library
+    img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+
     #MODEL SETTINGS
     model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=4)
     netscale = 4
@@ -36,10 +40,9 @@ def enhance(img):
         gpu_id=None)
 
     # Get image extension
-    extension = (img.name.split('/'))[-1].split('.')[-1]
-
-    # Read image with cv2 library
-    img = cv2.imread(img.name, cv2.IMREAD_UNCHANGED)
+    filename = os.path.basename(img_path)
+    name, extension = os.path.splitext(filename)
+    extension = extension.lstrip('.')  # remove the leading dot
 
     #Find the image type
     if len(img.shape) == 3 and img.shape[2] == 4:
@@ -54,8 +57,14 @@ def enhance(img):
         extension = 'png'
 
     # cv2.imencode(extension, output)[1]
-    enhanced_image = base64.b64encode(cv2.imencode(f".{extension}", output)[1])
+    enhanced_image = base64.b64encode(cv2.imencode(f".{extension}", output)[1].tobytes())
     return enhanced_image
 
-img = open("inputs/image.png")
-enhance(img)
+
+
+# img = input("input b64 image: ")
+
+# print(img)
+# # img_64 = base64.b64encode(img)
+# # print(img_64)
+# enhance(img)

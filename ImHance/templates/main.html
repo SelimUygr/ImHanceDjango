@@ -18,6 +18,7 @@
 
     .navbar {
       background-color: #34495e;
+      padding: 8px 40px;
     }
 
     .navbar-brand {
@@ -35,16 +36,66 @@
     }
 
     .btn-primary {
-      background-color: #34495e;
-      border-color: #34495e;
+      background-color: #34495e !important;
+      border-color: #34495e !important;
       transition: background-color 0.3s, border-color 0.3s;
+      -webkit-appearance: none !important;
+      box-shadow: unset !important;
     }
 
     .btn-primary:hover {
       background-color: #2c3e50;
       border-color: #2c3e50;
     }
+
+    .image-input {
+      box-shadow: unset !important;
+
+    }
+
+    .convert-btn {
+      position: relative;
+    }
+
+    .convert-btn-text.hidden {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .loader {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #FFF;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
+
 </head>
 
 <body>
@@ -57,14 +108,19 @@
         <h1 class="text-center mb-4">Image Converter</h1>
         <div class="card">
           <div class="card-body">
-            <form method="post" action="{% url 'main' %}" enctype="multipart/form-data">
+            <form method="post" action="{% url 'ImageEnhancerFunction' %}" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="mb-3">
                 <label for="image_file" class="form-label">Select an image to convert:</label>
-                <input type="file" class="form-control" name="image_file" id="image_file">
+                <input type="file" class="form-control image-input" name="image_file" id="image_file">
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Convert</button>
+                <button type="submit" class="btn btn-primary convert-btn" onclick="openLoader()">
+                  <div class="btn-txt convert-btn-text">
+                    Convert
+                  </div>
+                  <div class="loader hidden"></div>
+                </button>
               </div>
             </form>
           </div>
@@ -72,6 +128,14 @@
       </div>
     </div>
   </div>
+  <script>
+    function openLoader() {
+      const loader = document.querySelector('.loader')
+      const button = document.querySelector('.convert-btn-text')
+      loader.classList.remove('hidden')
+      button.classList.add('hidden')
+    }
+  </script>
 </body>
 
 </html>
