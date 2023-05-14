@@ -182,9 +182,9 @@
   <div class="container d-flex justify-content-center mt-4">
     <div class="image-container">
       <div id="comparison">
-        <figure class="enhanced-image">
-          <div id="divisor" class="old-image">
-          </div>
+        <figure>
+          <img id="old-image" style="position: absolute;" src="">
+          <img id="enhanced-image" style="position: absolute; width: 50%;" src="">
         </figure>
         <input type="range" min="0" max="100" value="50" id="slider" oninput="moveDivisor()">
       </div>
@@ -204,20 +204,21 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const spinner = document.getElementById("spinner");
-      const oldImage = document.querySelector(".old-image");
-      const enhancedImage = document.querySelector('.enhanced-image')
+      const oldImage = document.getElementById("old-image");
+      const enhancedImage = document.getElementById('enhanced-image')
+
       spinner.style.display = "block";
       spinner.style.display = "none";
-      oldImage.style.backgroundImage = `url("data:image/png;base64,{{ old_image }}")`
-      console.log("{{ old_image }}")
-      enhancedImage.style.backgroundImage = `url("data:image/png;base64,{{ image }}")`
+
+      oldImage.src = `data:image/png;base64,{{ old_image }}`
+      enhancedImage.src = `data:image/png;base64,{{ image }}`
     });
 
-    // Before After 
-    var divisor = document.getElementById("divisor"),
+    var enhancedImage = document.getElementById("enhanced-image"),
       slider = document.getElementById("slider");
+
     function moveDivisor() {
-      divisor.style.width = slider.value + "%";
+      enhancedImage.style.width = slider.value + "%";
     }
   </script>
 </body>
