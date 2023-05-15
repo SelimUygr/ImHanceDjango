@@ -33,6 +33,8 @@ CSRF_TRUSTED_ORIGINS = ["https://*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'RealESRGANAPP.apps.RealesrganappConfig',
+    'register.apps.RegisterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
