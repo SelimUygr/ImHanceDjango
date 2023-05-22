@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+      /* Add this line */
+      height: 100%;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .main-bg-low,
+    .main-bg-high {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-bg-low {
+      z-index: 1;
+      width: 50%;
+      overflow: hidden;
+    }
+
+    main .main-bg img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 568px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"],
+    button.btn-link {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"]:hover,
+    button.btn-link:hover {
+      background-color: #0056b3;
+    }
+
+    button.btn-link {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: fit-content;
+      box-sizing: border-box;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    button.btn-link:hover {
+      background-color: #ffffff;
+      /* Change the background color to the same color as normal state */
+      color: rgb(0, 0, 0);
+      /* Change the text color to the same color as normal state */
+    }
+
+
+
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+
+
+    p {
+      color: red;
+      text-align: center;
+    }
+
+    p.warning {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  {% load static%}
+  <main>
+    <div class="main-bg">
+      <div class="main-bg-low">
+        <img src="{% static 'imgs/loginPage/cartoon.jpg' %}" alt="" />
+      </div>
+      <div class="main-bg-high">
+        <img src="{% static 'imgs/loginPage/cartoon_enhanced.png' %}" alt="" />
+      </div>
+    </div>
+    {% if status == 401 %}
+    <script>
+      alert("Unauthorized access! Please login with valid credentials.");
+    </script>
+    {% endif %}
+
+    <form method="post" action="{% url 'LoginPage' %}">
+
+      {% csrf_token %}
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br />
+      <label for="password">Password:</label><br />
+      <input type="password" id="password" name="password" required /><br />
+      <input type="submit" value="Login" />
+      <button type="button" class="btn btn-link" onclick="location.href = '/register'">Don't Have an Account?</button>
+    </form>
+
+    <!-- {% if message %}
+    <p>{{ message }}</p>
+    {% endif %} -->
+    <script>
+      const lowImage = document.querySelector(".main-bg-low")
+      document.addEventListener("mousemove", function (e) {
+        var cursorX = e.clientX
+        var cursorY = e.clientY
+        lowImage.style.width = cursorX + "px"
+      })
+    </script>
+  </main>
+</body>
+
+</html>

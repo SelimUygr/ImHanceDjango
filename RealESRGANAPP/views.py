@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from users.models import Pictures
 from . import inference_realesrgan
 import base64
 import cv2
 # Create your views here.
 def index(request):
-    return render(request,'main.html')
+    return render(request,'mainPage.html')
 
 def enhance_image(request):
     # Ensure there's a file and it's a POST request
@@ -32,7 +33,8 @@ def enhance_image(request):
         # After enhancing the image, delete the temporary file
         default_storage.delete(path)
 
-        return render(request, 'result.html', {
+        # Return to the result page.
+        return render(request, 'resultPage.html', {
             'image': enhanced_image_str,
             'old_image': old_image_base64
         })
